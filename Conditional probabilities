@@ -1,0 +1,136 @@
+Directed Acyclic Graph (DAG):
+
+Here's a visual representation of the Bayesian Belief Network structure for this health monitoring system:
+
+ 
+
+Part b.
+
+HealthCondition (HC):
+
+P(HC = Good) = 0.8
+P(HC = Poor) = 0.2
+Assumption: Most people are in good health by default, so there's a higher probability of "Good" health condition.
+Exercise (Ex):
+
+P(Ex = Yes | HC = Good) = 0.7
+P(Ex = No | HC = Good) = 0.3
+P(Ex = Yes | HC = Poor) = 0.3
+P(Ex = No | HC = Poor) = 0.7
+Assumption: People in good health are more likely to exercise, while those in poor health are less likely to exercise.
+HeartRate (HR):
+
+P(HR = Normal | HC = Good, Ex = Yes) = 0.8
+P(HR = Elevated | HC = Good, Ex = Yes) = 0.2
+P(HR = Normal | HC = Good, Ex = No) = 0.9
+P(HR = Elevated | HC = Good, Ex = No) = 0.1
+P(HR = Normal | HC = Poor, Ex = Yes) = 0.6
+P(HR = Elevated | HC = Poor, Ex = Yes) = 0.4
+P(HR = Normal | HC = Poor, Ex = No) = 0.7
+P(HR = Elevated | HC = Poor, Ex = No) = 0.3
+Assumption: Exercise and health condition affect heart rate, with exercise generally increasing heart rate and poor health condition increasing the likelihood of elevated heart rate.
+EnergyLevel (EL):
+
+P(EL = High | Ex = Yes) = 0.8
+P(EL = Low | Ex = Yes) = 0.2
+P(EL = High | Ex = No) = 0.3
+P(EL = Low | Ex = No) = 0.7
+Assumption: Exercise increases energy level, so it's more likely to be high when a person exercises.
+BreathingRate (BR):
+
+P(BR = Normal | HR = Normal, EL = High) = 0.8
+P(BR = Elevated | HR = Normal, EL = High) = 0.2
+P(BR = Normal | HR = Elevated, EL = High) = 0.4
+P(BR = Elevated | HR = Elevated, EL = High) = 0.6
+P(BR = Normal | HR = Normal, EL = Low) = 0.6
+P(BR = Elevated | HR = Normal, EL = Low) = 0.4
+P(BR = Normal | HR = Elevated, EL = Low) = 0.2
+P(BR = Elevated | HR = Elevated, EL = Low) = 0.8
+Assumption: Both elevated heart rate and high energy level can contribute to elevated breathing rate.
+These estimated probabilities are based on reasonable assumptions and are meant to capture the intuitive relationships between the variables in the health monitoring system. They allow us to make probabilistic inferences about a person's health condition given observed data on exercise, heart rate, energy level, and breathing rate.
+
+
+Part c.
+Query (a): P(HeartRate|Exercise=T, EnergyLevel=T) 
+= 0.26
++--------------+------------------+
+| HeartRate    |   phi(HeartRate) |
++==============+==================+
+| HeartRate(0) |           0.7400 |
++--------------+------------------+
+| HeartRate(1) |           0.2600 |
++--------------+------------------+
+
+Query (b): P(HealthCondition|Exercise=T)
+= 0.2
++--------------------+------------------------+
+| HealthCondition    |   phi(HealthCondition) |
++====================+========================+
+| HealthCondition(0) |                 0.8000 |
++--------------------+------------------------+
+| HealthCondition(1) |                 0.2000 |
++--------------------+------------------------+
+
+Query (c): P(HeartRate|HealthCondition=T, Exercise=T)
+=0.9
++--------------+------------------+
+| HeartRate    |   phi(HeartRate) |
++==============+==================+
+| HeartRate(0) |           0.1000 |
++--------------+------------------+
+| HeartRate(1) |           0.9000 |
++--------------+------------------+
+
+Query (d): P(EnergyLevel|Exercise=T, BreathingRate=T)
+=0.86
++----------------+--------------------+
+| EnergyLevel    |   phi(EnergyLevel) |
++================+====================+
+| EnergyLevel(0) |             0.1421 |
++----------------+--------------------+
+| EnergyLevel(1) |             0.8579 |
++----------------+--------------------+
+
+Query (e): P(BreathingRate|HeartRate=T, EnergyLevel=T)
+=0.80
++------------------+----------------------+
+| BreathingRate    |   phi(BreathingRate) |
++==================+======================+
+| BreathingRate(0) |               0.2000 |
++------------------+----------------------+
+| BreathingRate(1) |               0.8000 |
++------------------+----------------------+
+
+Query (f): P(HealthCondition|HeartRate=T, BreathingRate=T)
+Each query provides the probability distribution of the respective variable(s) given the evidence provided. The results will give insights into how the variables are related and how they affect each other.
+Query (f) - P(HealthCondition|HeartRate=T, BreathingRate=T):
+
+0=45
+ +--------------------+------------------------+
+| HealthCondition    |   phi(HealthCondition) |
++====================+========================+
+| HealthCondition(0) |                 0.5520 |
++--------------------+------------------------+
+| HealthCondition(1) |                 0.4480 |
++--------------------+------------------------+
+
+Summary of my intuition of this Bayesian Belief Network (BBN):
+
+In this Bayesian Belief Network, I have modeled a health-related scenario to capture the dependencies among various health-related variables. The key variables in this network are "HealthCondition," "Exercise," "HeartRate," "EnergyLevel," and "BreathingRate."
+
+•	"HealthCondition" represents an individual's health state, which can be either "Good" or "Poor."
+•	"Exercise" indicates whether the person engages in regular exercise or not.
+•	"HeartRate" reflects the heart rate of the individual, categorized as "Normal" or "Elevated."
+•	"EnergyLevel" describes the individual's energy level, which can be "High" or "Low."
+•	"BreathingRate" represents the breathing rate, categorized as "Normal" or "Elevated."
+
+Important Findings and Insights:
+
+Good health condition is more likely than poor health condition, reflecting that most people are assumed to be in good health by default.
+Exercise positively influences both heart rate and energy level, with exercise leading to higher heart rates and energy levels.
+Poor health condition is associated with a higher likelihood of an elevated heart rate.
+High energy levels are more probable when a person exercises regularly.
+Elevated heart rate and high energy level together contribute to an elevated breathing rate.
+Overall, this BBN helps us understand the relationships between various health-related factors and provides a basis for making probabilistic inferences about an individual's health condition, heart rate, energy level, and breathing rate based on available evidence. It emphasizes the importance of exercise and health conditions in influencing these health-related variables.
+
+Good luck from Bamidele Ajisogun
